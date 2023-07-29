@@ -20,30 +20,34 @@ function init() {
     element.addEventListener('click', function () {
         remove();
     });
+
+    element = document.getElementById('advanced-walk');
+    element.addEventListener('click', function () {
+        advancedWalk();
+    });
 }
 
 function walk() {
-   let el;
+    let el;
+    let textAreaObject = document.getElementById('walk-output');
 
-   el = document.getElementById('p1');
-   showNode(el);
+    el = document.getElementById('p1');
+    textAreaObject.value += showNode(el) + '\n\n';
 
-   el = el.firstChild;
-   showNode(el);
+    el = el.firstChild;
+    textAreaObject.value += showNode(el) + '\n\n';
 
-   el = el.nextSibling;
-   showNode(el);
+    el = el.nextSibling;
+    textAreaObject.value += showNode(el) + '\n\n';
 
-   el = el.lastChild;
-   showNode(el);
+    el = el.lastChild;
+    textAreaObject.value += showNode(el) + '\n\n';
 
-   el = el.parentNode.parentNode.parentNode;
-   showNode(el);
+    el = el.parentNode.parentNode.parentNode;
+    textAreaObject.value += showNode(el) + '\n\n';
 
-   el = el.querySelector('section > *');
-   showNode(el);
-
-
+    el = el.querySelector('section > *');
+    textAreaObject.value += showNode(el);
 }
 
 function showNode(el) {
@@ -51,7 +55,29 @@ function showNode(el) {
     let nodeName = el.nodeName;
     let nodeValue = el.nodeValue;
 
-    alert(`Node type: ${nodeType}\nNode name: ${nodeName}\nNode value: ${nodeValue}`);
+    return `Node type: ${nodeType}\nNode name: ${nodeName}\nNode value: ${nodeValue}`;
+}
+
+function recursiveAdvancedWalk(textAreaObject, treeWalkerObject, indent) {
+    let nodeObject = treeWalkerObject.firstChild();
+
+    while (nodeObject != null) {
+        textAreaObject.value += indent + nodeObject.nodeName + '\n';
+        if (nodeObject.firstChild != null) {
+            recursiveAdvancedWalk(textAreaObject, treeWalkerObject, "|   " + indent);
+            treeWalkerObject.parentNode();
+        }
+        nodeObject = treeWalkerObject.nextSibling();
+    }
+}
+
+function advancedWalk() {
+    let rootNode = document.documentElement;
+    let textAreaObject = document.getElementById('advanced-walk-output');
+    let treeWalkerObject = document.createTreeWalker(rootNode, NodeFilter.SHOW_ALL);
+    textAreaObject.value = '';
+    textAreaObject.value += rootNode.nodeName + '\n';
+    recursiveAdvancedWalk(textAreaObject, treeWalkerObject, '|-- ');
 }
 
 function modify() {
@@ -104,7 +130,7 @@ function add() {
 }
 
 function remove() {
-  document.body.removeChild(document.body.lastChild);
+    document.body.removeChild(document.body.lastChild);
 }
 
 window.addEventListener('DOMContentLoaded', init);
