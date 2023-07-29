@@ -189,7 +189,7 @@ function addElement() {
 
     switch (elementType.value) {
         case '1':
-            newElement = document.createTextNode(elementText.value + ": " + new Date().toLocaleString());
+            newElement = document.createTextNode(elementText.value + ": " + new Date().toLocaleString() + ' -- ');
             break;
         case '2':
             newElement = document.createComment(elementText.value + ": " + new Date().toLocaleString());
