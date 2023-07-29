@@ -62,7 +62,18 @@ function recursiveAdvancedWalk(textAreaObject, treeWalkerObject, indent) {
     let nodeObject = treeWalkerObject.firstChild();
 
     while (nodeObject != null) {
-        textAreaObject.value += indent + nodeObject.nodeName + '\n';
+
+        if (nodeObject.nodeType === Node.ELEMENT_NODE) {
+            textAreaObject.value += indent + nodeObject.nodeName + '\n';
+        } else {
+            let textContent = nodeObject.nodeValue.trim();
+            if (textContent === "" && nodeObject.nodeValue.includes("\n")) {
+                textAreaObject.value += indent + nodeObject.nodeName + ': \\n \n';
+            } else {
+                textAreaObject.value += indent + nodeObject.nodeName + ': ' + nodeObject.nodeValue.trim().slice(0, 5) + '...\n';
+            }
+        }
+
         if (nodeObject.firstChild != null) {
             recursiveAdvancedWalk(textAreaObject, treeWalkerObject, "|   " + indent);
             treeWalkerObject.parentNode();
