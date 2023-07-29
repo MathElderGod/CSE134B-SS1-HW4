@@ -1,5 +1,4 @@
 /* dom.js */
-
 function init() {
     let element = document.getElementById('walkBtn');
     element.addEventListener('click', function () {
@@ -68,14 +67,17 @@ function recursiveAdvancedWalk(textAreaObject, treeWalkerObject, indent) {
         } else {
             let textContent = nodeObject.nodeValue.trim();
             if (textContent === "" && nodeObject.nodeValue.includes("\n")) {
-                textAreaObject.value += indent + nodeObject.nodeName + ': \\n \n';
+                textAreaObject.value += indent + nodeObject.nodeName +
+                    ': \\n \n';
             } else {
-                textAreaObject.value += indent + nodeObject.nodeName + ': ' + nodeObject.nodeValue.trim().slice(0, 5) + '...\n';
+                textAreaObject.value += indent + nodeObject.nodeName + ': ' +
+                    nodeObject.nodeValue.trim().slice(0, 5) + '...\n';
             }
         }
 
         if (nodeObject.firstChild != null) {
-            recursiveAdvancedWalk(textAreaObject, treeWalkerObject, "|   " + indent);
+            recursiveAdvancedWalk(textAreaObject, treeWalkerObject, "|   " +
+                indent);
             treeWalkerObject.parentNode();
         }
         nodeObject = treeWalkerObject.nextSibling();
@@ -85,7 +87,8 @@ function recursiveAdvancedWalk(textAreaObject, treeWalkerObject, indent) {
 function advancedWalk() {
     let rootNode = document.documentElement;
     let textAreaObject = document.getElementById('advanced-walk-output');
-    let treeWalkerObject = document.createTreeWalker(rootNode, NodeFilter.SHOW_ALL);
+    let treeWalkerObject = document.createTreeWalker(rootNode, NodeFilter
+        .SHOW_ALL);
     textAreaObject.value = '';
     textAreaObject.value += rootNode.nodeName + '\n';
     recursiveAdvancedWalk(textAreaObject, treeWalkerObject, '|-- ');
@@ -109,7 +112,7 @@ function modify() {
     el.classList.add('fancy');
 
     // you can also update the dataset which change data-* attributes
-    el.dataset.cool = 'true';       // data-cool="true"
+    el.dataset.cool = 'true'; // data-cool="true"
     el.dataset.coolFactor = '9000'; //data-cool-factor="9000"
 
 }
