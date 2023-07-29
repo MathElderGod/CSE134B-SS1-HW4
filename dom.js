@@ -29,6 +29,11 @@ function init() {
     element.addEventListener('click', function () {
         advancedModify();
     });
+
+    element = document.getElementById('add-element-button');
+    element.addEventListener('click', function () {
+        addElement();
+    });
 }
 
 function walk() {
@@ -160,6 +165,65 @@ function add() {
     // let oldP = document.getElementById('p1');
     // oldP.insertAdjacentHTML('afterend', '<p>This is a<em>test</em> of the DOM</p>');
     // clearly short hands are pretty easy!
+}
+
+function isValidCustomTag(tagName) {
+    // A custom element tag must contain a hyphen and must not start with a number
+    return tagName.includes('-') && !/^[0-9]/.test(tagName);
+}
+
+function addElement() {
+    let elementType = document.getElementById('element-select');
+    let elementText = document.getElementById('element-text');
+    let outputSection = document.getElementById('select-output');
+    let newElement;
+    let textNode;
+
+    if (elementType.value === '1' && (elementText.value === '' || elementText.value == 'New Comment' || elementText.value == 'New Element')) {
+        elementText.value = 'New Text Node';
+    } else if (elementType.value === '2' && (elementText.value === '' || elementText.value == 'New Text Node' || elementText.value == 'New Element')) {
+        elementText.value = 'New Comment';
+    } else if (elementType.value === '3' && (elementText.value === '' || elementText.value == 'New Text Node' || elementText.value == 'New Comment')) {
+        elementText.value = 'New Element';
+    }
+
+    switch (elementType.value) {
+        case '1':
+            newElement = document.createTextNode(elementText.value + ": " + new Date().toLocaleString());
+            break;
+        case '2':
+            newElement = document.createComment(elementText.value + ": " + new Date().toLocaleString());
+            break;
+        case '3':
+            let validTags = [
+                "a", "abbr", "address", "area", "article", "aside", "audio", "b", "base",
+                "bdi", "bdo", "blockquote", "body", "br", "button", "canvas", "caption",
+                "cite", "code", "col", "colgroup", "data", "datalist", "dd", "del", "details",
+                "dfn", "dialog", "div", "dl", "dt", "em", "embed", "fieldset", "figcaption",
+                "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "head",
+                "header", "hgroup", "hr", "html", "i", "iframe", "img", "input", "ins", "kbd",
+                "label", "legend", "li", "link", "main", "map", "mark", "menu", "meta", "meter",
+                "nav", "noscript", "object", "ol", "optgroup", "option", "output", "p",
+                "picture", "pre", "progress", "q", "rp", "rt", "ruby", "s", "samp",
+                "script", "search", "section", "select", "small", "source", "span", "strong", "style",
+                "sub", "summary", "sup", "svg", "table", "tbody", "td", "template", "textarea",
+                "tfoot", "th", "thead", "time", "title", "tr", "track", "u", "ul", "var",
+                "video", "wbr"
+            ];
+            if (validTags.includes(elementText.value.toLowerCase()) || isValidCustomTag(elementText.value)) {
+                newElement = document.createElement(elementText.value); // create a new element with the specified tag name
+                textNode = document.createTextNode("New Element: " + new Date().toLocaleString());
+                newElement.appendChild(textNode); // add the text to the new element
+            } else {
+                alert("Invalid HTML tag. Please enter a valid tag name.");
+                return;
+            }
+            break;
+        default:
+            return;
+    }
+    outputSection.appendChild(newElement);
+    elementText.value = '';
 }
 
 function remove() {

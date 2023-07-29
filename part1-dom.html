@@ -112,6 +112,23 @@
                 background: #ff9b85;
             }
         }
+
+        #select-output {
+            background-color: var(--color4);
+            border: 3px solid var(--darkcolor1);
+            padding: 10px;
+            margin-top: 10px;
+            width: auto;
+            height: auto;
+            overflow: auto;
+        }
+
+        #select-output>* {
+            background-color: var(--color1);
+            border: 3px solid var(--darkcolor1);
+            padding: 10px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -157,13 +174,24 @@
             <fieldset>
                 <legend>Add</legend>
                 <label for="addBtn">Basic Addition</label>
-                <input type="button" id="addBtn" value="Add">
+                <input type="button" id="addBtn" value="Add"><br><br>
 
                 <!--
             Q3) Add a select menu that allows you to add a new element to the DOM.  The select menu should have the following options: Text Node, Comment, and Element. When you select one of these options and click the button, the appropriate element should be added to the DOM.  You may want to define an output tag to put the newly created elements in it and style it in a fashion with a border or background color, so you can tell it is new content.  You will need a corresponding text field to define the contents of the text node, comment text, or tag name you want to insert.  By default set the text of any added element to say "New Element" or "New Comment" or "New Text Node" depending on the type of element you are adding but add in the current date and time using a JS Date object.  You can use the toLocaleString() method to get a nicely formatted date and time string.
 
         -->
+                <label for="element-select">Element Type: </label>
+                <select name="elements" id="element-select" required>
+                    <option value="">-- Please choose an option --</option>
+                    <option value="1">Text Node</option>
+                    <option value="2">Comment</option>
+                    <option value="3">Element</option>
+                </select><br><br>
+                <label for="element-text">Enter text or a tag name: </label>
+                <input type="text" id="element-text" value="">
+                <input type="button" id="add-element-button" value="Add Element">
             </fieldset>
+            <output id="select-output"></output>
 
             <fieldset>
                 <legend>Remove</legend>
