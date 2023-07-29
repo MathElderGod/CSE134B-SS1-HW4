@@ -46,6 +46,44 @@
             font-size: 3rem;
         }
 
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                color: var(--color2);
+                transform: translateX(0);
+            }
+
+            25% {
+                opacity: 0.5;
+                color: var(--color3);
+                transform: translateX(500px);
+            }
+
+            50% {
+                opacity: 1;
+                color: var(--color4);
+                transform: translateX(0);
+            }
+
+            75% {
+                opacity: 0.5;
+                color: var(--color5);
+                transform: translateX(500px);
+            }
+
+            100% {
+                opacity: 0;
+                color: var(--color1);
+                transform: translateX(0px);
+            }
+        }
+
+        .shmancy {
+            font-weight: bolder;
+            font-style: italic;
+            animation: fadeIn 5s ease-in-out infinite;
+        }
+
         .fancy {
             animation-name: backgroundColorPalette;
             animation-duration: 10s;
@@ -105,7 +143,7 @@
             <fieldset>
                 <legend>Modify</legend>
                 <label for="modifyBtn">Simple Modification</label>
-                <input type="button" id="modifyBtn" value="Modify">
+                <input type="button" id="modifyBtn" value="Modify"><br><br>
 
                 <!--
             Q2) Add a new button "Advanced Modify" that does the following:
@@ -113,6 +151,7 @@
             2.  Changes the color of the h1 to a random dark color from one of the 5 CSS variables defined in the style tag above.  You can use the Math.random() function.
             3. Sets the class of the p tag to "shmancy" so that does a new CSS text effect of your own design. You can find something on the internet (please cite the URL of your inspiration) or make up your own.  You can use the classList property as you like, but make sure you toggle the animation class on and off every time you push the button.
         -->
+                <input type="button" id="advanced-modify" value="Advanced Modify">
             </fieldset>
 
             <fieldset>

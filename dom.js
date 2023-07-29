@@ -24,6 +24,11 @@ function init() {
     element.addEventListener('click', function () {
         advancedWalk();
     });
+
+    element = document.getElementById('advanced-modify');
+    element.addEventListener('click', function () {
+        advancedModify();
+    });
 }
 
 function walk() {
@@ -114,6 +119,20 @@ function modify() {
     // you can also update the dataset which change data-* attributes
     el.dataset.cool = 'true'; // data-cool="true"
     el.dataset.coolFactor = '9000'; //data-cool-factor="9000"
+
+}
+
+function advancedModify() {
+    const maxInt = 7;
+    const minInt = 1;
+    let mainHeadingElement = document.querySelector('h1');
+    let randomNumber = Math.floor(Math.random() * (maxInt - minInt) + minInt);
+    mainHeadingElement.innerText = `DOM Manipulation is Fun!`;
+    let style = getComputedStyle(document.documentElement);
+    let color = style.getPropertyValue(`--darkcolor${randomNumber}`);
+    mainHeadingElement.style.color = color;
+    let paragraphOneElement = document.getElementById('p1');
+    paragraphOneElement.classList.toggle('shmancy');
 
 }
 
