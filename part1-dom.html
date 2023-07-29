@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla DOM Manipulation Exercises</title>
+    <style media="screen">
+        :root {
+         --color1 : #ee6055;
+         --color2 : #60d394;
+         --color3 : #aaf683;
+         --color4 : #ffd97d;
+         --color5 : #ff9b85;
+
+         --darkcolor1 : black;
+         --darkcolor2 : darkslategray;
+         --darkcolor3 : darkgreen;
+         --darkcolor4 : darkgoldenrod;
+         --darkcolor5 : darkred;
+         --darkcolor6 : darkmagenta;
+        }
+
+        label {
+            display : block;
+            font-weight : bold;
+        }
+
+        #controls {
+            background : #eee;
+            margin : 2em;
+            padding : 2em;
+        }
+
+        #controls fieldset {
+            background : white;
+            margin : 1em;
+            padding : 1em;
+        }
+
+        h1 {
+            text-align : center;
+        }
+
+        #p1 {
+            color : slategray;
+            font-size : 3rem;
+        }
+
+        .fancy {
+            animation-name: backgroundColorPalette;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+        }
+
+        @keyframes backgroundColorPalette {
+            0% {background: var(--color1);}
+            25% {background: #60d394;}
+            50% {background: #aaf683;}
+            75% {background: #ffd97d;}
+            100% {background: #ff9b85;}
+        }
+    </style>
+</head>
+<body>
+<!-- start of HTML demo -->
+<h1>Vanilla DOM Manipulation</h1>
+<p id="p1">This is a <em>test</em> of the DOM</p>
+
+<section id="controls">
+<h2>Demos</h2>
+<form>
+    <fieldset>
+        <legend>Traversal</legend>
+        <label for="walkBtn">Basic Traversal</label>
+        <input type="button" id="walkBtn" value="Walk">
+
+        <!--
+            Q1a) Modify the simple walk button example to not use alerts but instead to print out the node information on the page in a <textarea> within this fieldset. Using appropriate spacing or returns, so we can see each step
+
+            Q1b) Add a new button "Advanced Walk" that does the following:
+                Walks the entire tree starting at the root and spits out the node structure into the <textarea> in the fieldset.  You should indent each level by 4 spaces or you may use -- and other characters like | to make a little tree in the textarea tag.  This is your choice.  Advanced students may create elements on the page and make a sophisticated, but be forewarned if  you are casual about this you may create an infinite traversal.  If you do this more advanced approach you should consider a DocumentFragment to build up the tree and then add it to the DOM all at once.
+
+                Hint: This walk can be done in at least two ways if not more. Doing a brute force traversal may not be the most direct way of doing things.  Looking over more advanced DOM discussions at MDN may reveal other approaches.
+        -->
+    </fieldset>
+
+    <fieldset>
+        <legend>Modify</legend>
+        <label for="modifyBtn">Simple Modification</label>
+        <input type="button" id="modifyBtn" value="Modify">
+
+        <!--
+            Q2) Add a new button "Advanced Modify" that does the following:
+            1.  Changes the text of the h1 to say "DOM Manipulation is Fun!"
+            2.  Changes the color of the h1 to a random dark color from one of the 5 CSS variables defined in the style tag above.  You can use the Math.random() function.
+            3. Sets the class of the p tag to "shmancy" so that does a new CSS text effect of your own design. You can find something on the internet (please cite the URL of your inspiration) or make up your own.  You can use the classList property as you like, but make sure you toggle the animation class on and off every time you push the button.
+        -->
+    </fieldset>
+
+    <fieldset>
+        <legend>Add</legend>
+        <label for="addBtn">Basic Addition</label>
+        <input type="button" id="addBtn" value="Add">
+
+        <!--
+            Q3) Add a select menu that allows you to add a new element to the DOM.  The select menu should have the following options: Text Node, Comment, and Element. When you select one of these options and click the button, the appropriate element should be added to the DOM.  You may want to define an output tag to put the newly created elements in it and style it in a fashion with a border or background color, so you can tell it is new content.  You will need a corresponding text field to define the contents of the text node, comment text, or tag name you want to insert.  By default set the text of any added element to say "New Element" or "New Comment" or "New Text Node" depending on the type of element you are adding but add in the current date and time using a JS Date object.  You can use the toLocaleString() method to get a nicely formatted date and time string.
+
+        -->
+    </fieldset>
+
+    <fieldset>
+        <legend>Remove</legend>
+        <label for="removeBtn">Simple Delete</label>
+        <input type="button" id="removeBtn" value="Remove">
+        <!--
+
+          Q4a) Safe Delete
+            add a new button to do a safe delete that deletes all the elements from the bottom up but skips over deleting the buttons and things in the section with all these demo controls
+
+          Q4b) Delete by selector
+            add a text field and a button to the fieldset that allows you to type a CSS selector and then delete all the elements that match that selector.
+        -->
+    </fieldset>
+
+    <fieldset>
+        <legend>Clone</legend>
+        <!--
+          Q5a) Add a button "Basic Clone" that clones the p tag and adds it to the DOM.  You can add it to the same area you added new content.  Be cautious with your cloning to modify attributes
+
+          Q5b) Add template at the bottom of the page with some HTML markup representing a "card" that would have and title, image, a short text paragraph and link.  This template should be hidden from view using the <template> tag.  Add a button "Advanced Clone" that clones the template and adds it to the DOM.  Generate some boilerplate text to put in the title and text put add in some random value or number, so you can tell each new card that you are adding.  Find a few images at Unsplash or other sites to use as the card image to make it interesting.  The card design is up to you, and you are more than welcome to get inspiration from online for design.  These cards might be what you could use for a portfolio or gallery of some sort so have fun as if you do this correctly, you can use for your portfolio site eventually.  Make sure you are using semantic HTML and simple CSS to style the cards.  You should use CSS variables.
+
+        -->
+    </fieldset>
+
+</form>
+</section>
+
+<hr>
+<h2>Look out below these will get deleted if you press the buttons above!</h2>
+<p>I am scared of being deleted!</p>
+<p>Me too. Oh noes, here comes the <code>removeChild()</code> method, it's going to delete us!</p>
+
+<!-- put all your new code in this dom.js file -->
+<script src="dom.js"></script>
+</body>
+</html>
