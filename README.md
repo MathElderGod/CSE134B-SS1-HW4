@@ -7,3 +7,5 @@
 ## Name: Alexander G. Arias
 
 ## PID: A16525320
+
+## [Netlify-Solution:](https://main--aquamarine-beignet-8364c0.netlify.app/part1-dom.html)
