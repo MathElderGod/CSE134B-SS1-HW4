@@ -130,6 +130,34 @@
             padding: 10px;
             margin-top: 10px;
         }
+
+        .card {
+            width: auto;
+            height: auto;
+            background-color: var(--color3);
+            border: 2px solid var(--darkcolor1);
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: var(--darkcolor1);
+        }
+
+        .card-image {
+            border: 2px solid var(--darkcolor1);
+        }
+
+        .card-description {
+            color: var(--darkcolor2);
+            font-size: 2.5vw;
+        }
+
+        .card-link {
+            color: var(--darkcolor6);
+        }
     </style>
 </head>
 
@@ -149,7 +177,7 @@
                 <!--
             Q1a) Modify the simple walk button example to not use alerts but instead to print out the node information on the page in a <textarea> within this fieldset. Using appropriate spacing or returns, so we can see each step
             Q1b) Add a new button "Advanced Walk" that does the following:
-                Walks the entire tree starting at the root and spits out the node structure into the <textarea> in the fieldset.  You should indent each level by 4 spaces or you may use -- and other characters like | to make a little tree in the textarea tag.  This is your choice.  Advanced students may create elements on the page and make a sophisticated, but be forewarned if  you are casual about this you may create an infinite traversal.  If you do this more advanced approach you should consider a DocumentFragment to build up the tree and then add it to the DOM all at once.
+                Walks the entire tree starting at the root and spits out the node structure into the <textarea> in the fieldset.  You should indent each level by 4 spaces or you may use and other characters like | to make a little tree in the textarea tag.  This is your choice.  Advanced students may create elements on the page and make a sophisticated, but be forewarned if  you are casual about this you may create an infinite traversal.  If you do this more advanced approach you should consider a DocumentFragment to build up the tree and then add it to the DOM all at once.
 
                 Hint: This walk can be done in at least two ways if not more. Doing a brute force traversal may not be the most direct way of doing things.  Looking over more advanced DOM discussions at MDN may reveal other approaches.
         -->
@@ -197,7 +225,7 @@
             <fieldset>
                 <legend>Remove</legend>
                 <label for="removeBtn">Simple Delete</label>
-                <input type="button" id="removeBtn" value="Remove">
+                <input type="button" id="removeBtn" value="Remove"><br><br>
                 <!--
 
           Q4a) Safe Delete
@@ -206,6 +234,15 @@
           Q4b) Delete by selector
             add a text field and a button to the fieldset that allows you to type a CSS selector and then delete all the elements that match that selector.
         -->
+                <label for="safe-delete-button">Safe Delete: </label>
+                <input type="button" id="safe-delete-button" value="Safe Remove">
+
+                <fieldset>
+                    <legend>Delete by CSS Selector:</legend>
+                    <input type="text" id="css-selector" placeholder="Enter CSS Selector.">
+                    <button id="del-css-selector-button">Delete CSS Selector</button>
+                </fieldset>
+
             </fieldset>
 
             <fieldset>
@@ -216,6 +253,11 @@
           Q5b) Add template at the bottom of the page with some HTML markup representing a "card" that would have and title, image, a short text paragraph and link.  This template should be hidden from view using the <template> tag.  Add a button "Advanced Clone" that clones the template and adds it to the DOM.  Generate some boilerplate text to put in the title and text put add in some random value or number, so you can tell each new card that you are adding.  Find a few images at Unsplash or other sites to use as the card image to make it interesting.  The card design is up to you, and you are more than welcome to get inspiration from online for design.  These cards might be what you could use for a portfolio or gallery of some sort so have fun as if you do this correctly, you can use for your portfolio site eventually.  Make sure you are using semantic HTML and simple CSS to style the cards.  You should use CSS variables.
 
         -->
+                <label for="clone-paragraph-button">Clone Thee Paragraph:</label>
+                <input type="button" id="clone-paragraph-button" value="Basic Clone"><br><br>
+
+                <label for="clone-template-card">Clone Template Card:</label>
+                <input type="button" id="clone-template-card" value="Advanced Clone">
             </fieldset>
 
         </form>
@@ -225,6 +267,14 @@
     <h2>Look out below these will get deleted if you press the buttons above!</h2>
     <p>I am scared of being deleted!</p>
     <p>Me too. Oh noes, here comes the <code>removeChild()</code> method, it's going to delete us!</p>
+    <template id="card-template1">
+        <div class="card">
+            <h2 class="card-title">Card Title</h2>
+            <img class="card-image" src="/images/placeholder.jpg" alt="Placeholder Image!" width="100" height="100">
+            <p class="card-description">This is a placeholder description for the card.</p>
+            <a class="card-link" href="#">Placeholder Link</a>
+        </div>
+    </template>
 
     <!-- put all your new code in this dom.js file -->
     <script src="dom.js"></script>
